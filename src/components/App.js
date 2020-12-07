@@ -16,6 +16,7 @@ class App extends Component{
             user: {}
         }
         this.handleLogin = this.handleLogin.bind(this);
+        this.handleLogout = this.handleLogout.bind(this);
     }    
 
     checkLoginStatus(){
@@ -32,6 +33,12 @@ class App extends Component{
             .catch(error=>
                 console.log("Check loggin error",error)
                 );
+    }
+    handleLogout(){
+        this.setState({
+            loggedInStatus: "NOT_LOGGED_IN",
+            user:{}
+        });
     }
 
     componentDidMount(){
@@ -58,7 +65,12 @@ class App extends Component{
                             exact 
                             path={"/"}
                             render={props=>(
-                                <Home {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.loggedInStatus}/>
+                                <Home 
+                                    {...props} 
+                                    handleLogin={this.handleLogin} 
+                                    handleLogout={this.handleLogout} 
+                                    loggedInStatus={this.state.loggedInStatus}
+                                />
                             )}
                             /> 
                         <Route 
